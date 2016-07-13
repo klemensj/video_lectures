@@ -33,7 +33,6 @@ print(n)
 # Create the vector of group names and set the order of the levels so that ###the graph stacks nicely
 # CHANGE LEVELS IF NECESSARY
 
-
 SurveyG<-Survey$Group
 SurveyG<-factor(SurveyG, levels = c('Longform', 'Faculty','Student'))
 
