@@ -36,6 +36,11 @@ WB$Video <- "WB"
 
 AllData<-rbind(AN,DI,NC,PP,WB)
 
+#reorder the columns to get the final presentation I want
+## with extract contex retain grouped and attention, engagement,enjoyment grouped
+
+AllData<-AllData[c(1,2,4,5,3,6,7,8)]
+
 #create one data frame per likert graph
 
 FacultyData <- subset(AllData, Group == "Faculty")
@@ -91,8 +96,8 @@ summary(StudentLIK)
 ###turned to FALSE
 # # CHANGE TITLE
 
-title<-"FACULTY\nCompared to a typical in-person lecture the ______ video lecture\n affects my (my students) learning experience:\n "
+title<-"FACULTY\nCompared to a typical in-person lecture the ______ video lecture\n affects my students':\n "
 plot(FacultyLIK, include.histogram = F) + ggtitle(title)
 
-title<-"STUDENTS\nCompared to a typical in-person lecture the ______ video lecture\n affects my (my students) learning experience:\n "
+title<-"STUDENTS\nCompared to a typical in-person lecture the ______ video lecture\n affects my:\n "
 plot(StudentLIK, include.histogram = F) + ggtitle(title)
