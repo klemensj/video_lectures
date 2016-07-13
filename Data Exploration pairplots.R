@@ -1,8 +1,16 @@
+## this code creates a set of pairplots for all of the response variables for faculty and students
+## it also runs a simple factor factor interaction ANOVA for each response variable 
+## result is that responses are highly correlated, more for faculty than for students
+## faculty or student and video type always highly significant
+## interaction significant for response variables engage, enjoy, maintain, 
+## interaction not significant for extract, retain, or context
+
+
 library("psych", lib.loc="~/Library/R/3.2/library")
 
-## Read in dataset that is all of the numberical data from the initial (fall) survey
+## Read in dataset that is all of the numerical data from the initial (fall) survey
 
-Numerical_Fall <- read.csv("~/Code/R/video_lectures/Numerical_Fall.csv")
+Numerical_Fall <- read.csv("data/Numerical_Fall.csv")
 
 ## Separate into faculty and student
 
@@ -14,11 +22,11 @@ Student_Numerical_Fall <- subset(Numerical_Fall, Group == "Student")
 pairs.panels(Faculty_Numerical_Fall[,2:7], main = "Faculty All Responses")
 pairs.panels(Student_Numerical_Fall[,2:7], main = "Students All Responses")
 
- #  ANOVA of everything together
+##  ANOVA of everything together for each response variable
 
 engage <- as.numeric(Numerical_Fall$Engage)
 video_ANOVA<- lm(engage ~ Numerical_Fall$Video*Numerical_Fall$Group)
-anova(video_ANOVA_engage)
+anova(video_ANOVA)
 
 extract <- as.numeric(Numerical_Fall$Extract)
 video_ANOVA <- lm(extract ~ Numerical_Fall$Video*Numerical_Fall$Group)
