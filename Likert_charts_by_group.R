@@ -45,6 +45,7 @@ AllData<-AllData[c(1,2,4,5,3,6,7,8)]
 
 FacultyData <- subset(AllData, Group == "Faculty")
 StudentData <- subset(AllData, Group == "Student")
+LongformData <- subset(AllData, Group == "Longform")
 
 
 #Create a data frame of just the responses (strip group data from the dataset)
@@ -53,6 +54,7 @@ StudentData <- subset(AllData, Group == "Student")
 
 FacultyDF<-as.data.frame(FacultyData[ ,2:7])
 StudentDF<-as.data.frame(StudentData[ ,2:7])
+LongformDF<-as.data.frame(LongformData[ ,2:7])
 
 
 # Recode the ordering of the levels for each dataset 
@@ -72,6 +74,11 @@ for(n in 1:question_number)
   StudentDF[, n]<-factor(StudentDF[, n], levels = c('Strongly impaired', 'Slightly impaired', 'About the Same', 'Slightly improved', 'Strongly improved'))
 }
 
+n<-1
+for(n in 1:question_number)
+{
+  LongformDF[, n]<-factor(LongformDF[, n], levels = c('Strongly impaired', 'Slightly impaired', 'About the Same', 'Slightly improved', 'Strongly improved'))
+}
 
 # Create the vector of group names and set the order of the levels so that 
 ###the graph stacks nicely
@@ -83,6 +90,9 @@ FacultyGroup<-factor(FacultyGroup, levels = c('PP','NC','DI','WB','AN'))
 StudentGroup<-StudentData$Video
 StudentGroup<-factor(StudentGroup, levels = c('PP','NC','DI','WB','AN'))
 
+LongformGroup<-LongformData$Video
+LongformGroup<-factor(LongformGroup, levels = c('PP','NC','DI','WB','AN'))
+
 #create the likert item and print the summary
 
 FacultyLIK<-likert(FacultyDF, grouping = FacultyGroup)
@@ -90,6 +100,9 @@ summary(FacultyLIK)
 
 StudentLIK<-likert(StudentDF, grouping = StudentGroup)
 summary(StudentLIK)
+
+LongformLIK<-likert(LongformDF, grouping = LongformGroup)
+summary(LongformLIK)
 
 #Plot the likert item with a title
 #For some reason the title only works when the histogram of responses is 
@@ -101,3 +114,31 @@ plot(FacultyLIK, include.histogram = F) + ggtitle(title)
 
 title<-"STUDENTS\nCompared to a typical in-person lecture the ______ video lecture\n affects my:\n "
 plot(StudentLIK, include.histogram = F) + ggtitle(title)
+
+title<-"STUDENTS - Long Video\nCompared to a typical in-person lecture the ______ video lecture\n affects my:\n "
+plot(LongformLIK, include.histogram = F) + ggtitle(title)
+
+## CReate a new plot that just does the AN and PP, comparing long and short directly
+## Extract it from the big AllData database 
+## Then do all the same as above
+
+AllStudentData<-rbind(AN,PP)
+AllStudentData<-AllStudentData[c(1,2,4,5,3,6,7,8)]
+AllStudentData$Group<-paste(AllStudentData$Video,AllStudentData$Group, sep="")
+StudentCompare <- subset(AllStudentData, Group == "ANStudent" | Group == "ANLongform" | Group == "PPStudent" | Group == "PPLongform")
+StudentCompareDF<-as.data.frame(StudentCompare[ ,2:7])
+
+n<-1
+for(n in 1:question_number)
+{
+  StudentCompareDF[, n]<-factor(StudentCompareDF[, n], levels = c('Strongly impaired', 'Slightly impaired', 'About the Same', 'Slightly improved', 'Strongly improved'))
+}
+
+StudentCompareGroup<-StudentCompare$Group
+StudentCompareGroup<-factor(StudentCompareGroup, levels = c('PPLongform','ANLongform','PPStudent','ANStudent'))
+
+StudentCompareLIK<-likert(StudentCompareDF, grouping = StudentCompareGroup)
+summary(StudentCompareLIK)
+
+title<-"STUDENTS SHORT AND LONG VIDEOS\nCompared to a typical in-person lecture the ______ video lecture\n affects my students':\n "
+plot(StudentCompareLIK, include.histogram = F) + ggtitle(title)
