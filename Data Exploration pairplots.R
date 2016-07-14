@@ -47,3 +47,14 @@ anova(video_ANOVA)
 maintain <- as.numeric(Numerical_Fall$Maintain)
 video_ANOVA <- lm(maintain ~ Numerical_Fall$Video*Numerical_Fall$Group)
 anova(video_ANOVA)
+
+## From here on idea is to do ANOVA and create comparisons of 
+## Longform with regular student data just take AllStudentData , 
+## create a bunch of new columns based on numbers
+
+Numerical_Spring<-subset
+
+## t test of the test scores
+
+quiz_results<-read.csv("data/quiz_results.csv", header = TRUE, na.strings=".", check.names=FALSE)
+t.test(quiz_results$animated, quiz_results$powerpoint)
