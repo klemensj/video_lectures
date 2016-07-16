@@ -52,6 +52,11 @@ anova(video_ANOVA)
 
 Numerical_Spring<-read.csv("data/Numerical_Spring.csv", header = TRUE, na.strings=".", check.names=FALSE)
 
+## Added a pairplot for that data
+
+pairs.panels(Numerical_Spring[,2:7], main = "Longform Video Responses")
+
+
 ## Bind together with fall student data
 
 SpringFallStudent<-rbind(Student_Numerical_Fall,Numerical_Spring)
