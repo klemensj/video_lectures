@@ -82,13 +82,28 @@ maintain <- as.numeric(SpringFallStudent$Maintain)
 video_ANOVA <- lm(maintain ~ SpringFallStudent$Video*SpringFallStudent$Group)
 anova(video_ANOVA)
 
-## Means for use in generating interaction plot
+## Means for use in generating interaction plots
 
-springave<-apply(Numerical_Spring[,2:7],2,mean, na.rm=TRUE)
-fallave<-apply(Student_Numerical_Fall[,2:7],2,mean, na.rm=TRUE)
+fallavePP<-apply(subset(Student_Numerical_Fall[,2:7],Student_Numerical_Fall$Video == "PP"),2,mean, na.rm=TRUE)
+fallaveAN<-apply(subset(Student_Numerical_Fall[,2:7],Student_Numerical_Fall$Video == "AN"),2,mean, na.rm=TRUE)
+springavePP<-apply(subset(Numerical_Spring[,2:7],Numerical_Spring$Video == "PP"),2,mean, na.rm=TRUE)
+springaveAN<-apply(subset(Numerical_Spring[,2:7],Numerical_Spring$Video == "AN"),2,mean, na.rm=TRUE)
+
+fallavePP
+fallaveAN
+springavePP
+springaveAN
+
+## Create line graph for interaction plot 
+
+################Moved this to Interaction_plots.R
 
 
 ## t test of the test scores
 
 quiz_results<-read.csv("data/quiz_results.csv", header = TRUE, na.strings=".", check.names=FALSE)
 t.test(quiz_results$animated, quiz_results$powerpoint)
+apply(quiz_results,2,mean, na.rm=TRUE)
+apply(quiz_results,2,sd, na.rm=TRUE)
+
+## Boxplot of the t test
