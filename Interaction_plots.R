@@ -51,7 +51,7 @@ lines(Plot2$X_coord, Plot2$Engage,type="b", pch="S", cex=1.5)
 #student data
 lines(PlotL$X_coord, PlotL$Engage,type="b", pch="L", cex=1.5)
 
-#reset range for second graph
+
 yrange<-range(Plot2$Extract)
 ## plot second graph for extract data
 plot(xrange, yrange, type="n", xaxt="n", ylim = c(3.1,3.6), xlab="Increasing Difficulty of Preparation",
@@ -61,3 +61,35 @@ axis(1,at=x, labels=videolabels, cex.axis=1.5)
 lines(Plot2$X_coord, Plot2$Extract,type="b", pch="S", cex=1.5)
 #student data
 lines(PlotL$X_coord, PlotL$Extract,type="b", pch="L", cex=1.5)
+
+
+## Additional added because it turns out extract was atypical
+fallaveWB<-apply(subset(Student_Numerical_Fall[,2:7],Student_Numerical_Fall$Video == "WB"),2,mean, na.rm=TRUE)
+fallaveNC<-apply(subset(Student_Numerical_Fall[,2:7],Student_Numerical_Fall$Video == "NC"),2,mean, na.rm=TRUE)
+fallaveDI<-apply(subset(Student_Numerical_Fall[,2:7],Student_Numerical_Fall$Video == "DI"),2,mean, na.rm=TRUE)
+fallaveWB
+fallaveNC
+fallaveDI
+
+xrange<-range(Plot2$X_coord)
+yrange<-range(Plot2$Maintain)
+x<-c(1:5)
+videolabels<-c("Whiteboard","Powerpoint","Newscaster","Diagrams","Animation")
+plot(xrange, yrange, ylim = c(2.8,3.5),type="n", xaxt="n", xlab="Increasing Difficulty of Preparation",
+     ylab="Maintenance Score", cex.lab=1.5)
+axis(1,at=x, labels=videolabels, cex.axis=1.5)
+#faculty data
+lines(Plot2$X_coord, Plot2$Maintain,type="b", pch="S", cex=1.5)
+#student data
+lines(PlotL$X_coord, PlotL$Maintain,type="b", pch="L", cex=1.5)
+
+#reset range for second graph
+yrange<-range(Plot2$Enjoy)
+## plot second graph for extract data
+plot(xrange, yrange, type="n", xaxt="n", ylim = c(2.8,3.6), xlab="Increasing Difficulty of Preparation",
+     ylab="Information Enjoyment Score" , cex.lab=1.5)
+axis(1,at=x, labels=videolabels, cex.axis=1.5)
+#faculty data
+lines(Plot2$X_coord, Plot2$Enjoy,type="b", pch="S", cex=1.5)
+#student data
+lines(PlotL$X_coord, PlotL$Enjoy,type="b", pch="L", cex=1.5)
