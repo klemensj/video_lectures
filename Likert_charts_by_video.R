@@ -10,7 +10,7 @@ require(likert)
 # Subsequent columns are headed with the question text for each question and contain the 
 ### responses that make up the data set CHANGE FILENAME IN THIS COMMAND
 
-Survey<-read.csv("/Users/klemensj/Dropbox/Projects/DECSYS\ Research/Datasets/Consolidated_150424/for_analysis/text/PP.csv", header = TRUE, na.strings=".", check.names=FALSE)
+Survey<-read.csv("data/PP.csv", header = TRUE, na.strings=".", check.names=FALSE)
 
 
 #Create the data frame of responses (strip group data from the dataset)
